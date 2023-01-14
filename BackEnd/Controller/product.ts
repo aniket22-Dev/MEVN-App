@@ -2,9 +2,9 @@ const UserModel = require('../model/productModel')
 
 // Create and Save a new user
 exports.create = async (req: { body: { email: any; firstName: any; lastName: any; phone: any; productName: any; productPrice: any; ProductImage: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: { message: any; }): void; new(): any; }; }; send: (arg0: { message: string; user: any; }) => void; }) => {
-    // if (!req.body.email && !req.body.firstName && !req.body.lastName && !req.body.phone) {
-    //     res.status(400).send({ message: "Content can not be empty!" });
-    // }
+    if (!req.body.email && !req.body.firstName && !req.body.lastName && !req.body.phone) {
+        res.status(400).send({ message: "Content can not be empty!" });
+    }
     
     const user = new UserModel({
         productName: req.body.productName,
