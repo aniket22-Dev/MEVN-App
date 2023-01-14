@@ -1,6 +1,9 @@
 const productMongoose = require('mongoose');
 
 const schema = new productMongoose.Schema({
+    productId: {
+        type: String
+    },
     productName: {
         type: String,
         required: false,
@@ -11,8 +14,7 @@ const schema = new productMongoose.Schema({
         default: ''
     },
     ProductImage: {
-        type: String,
-        default: ''
+        type: String
     }
 });
 
