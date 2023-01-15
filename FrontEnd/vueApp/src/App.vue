@@ -1,9 +1,11 @@
 <template>
-  <CollectionGrid/>
+  <RouterLink to="/collection">Collection</RouterLink>
+  <RouterLink to="/admin/create">Admin</RouterLink>
+  <RouterView></RouterView>
+  
 </template>
 
 <script setup lang="ts">
-import CollectionGrid from './components/CollectionGrid.vue';
 </script>
 
 <style scoped>
