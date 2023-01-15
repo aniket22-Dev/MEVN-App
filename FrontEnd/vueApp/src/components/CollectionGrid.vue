@@ -15,7 +15,7 @@
                   {{ product.productName }}
               </h3>
             </div>
-            <p class="text-sm font-medium text-gray-900">{{ product.productPrice }}</p>
+            <p class="text-sm font-medium text-gray-900">$ {{ product.productPrice }}</p>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref,onMounted, computed} from "vue";
+import {onMounted, computed} from "vue";
 import { useAppStore } from '../store/appStore';
 
 const store = useAppStore();

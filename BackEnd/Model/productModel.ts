@@ -13,7 +13,7 @@ const schema = new productMongoose.Schema({
         type: String,
         default: ''
     },
-    ProductImage: {
+    productImage: {
         type: String
     }
 });
