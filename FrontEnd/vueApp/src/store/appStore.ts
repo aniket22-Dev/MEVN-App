@@ -10,7 +10,8 @@ export const useAppStore = defineStore("product",{
       productImage: '',
       productId: '',
       loading: false,
-      submitting: false
+      submitting: false,
+      fetchingResults: false
     }),
     getters: {
       getProducts(state){
@@ -20,12 +21,13 @@ export const useAppStore = defineStore("product",{
     actions: {
       async fetchProducts() {
         try {
+          this.fetchingResults = true;
           const data = await axios.get('http://localhost:3000/v2/getAll')
-            this.products = data.data 
+            this.products = data.data;
+            this.fetchingResults = false;
           }
           catch (error) {
-            alert(error)
-            console.log(error)
+            console.log("server Issue")
         }
       },
       async postProducts() {
@@ -49,7 +51,6 @@ export const useAppStore = defineStore("product",{
           });
         }
         catch(error) {
-          alert(error)
           console.log("error in posting product");
           
         }
