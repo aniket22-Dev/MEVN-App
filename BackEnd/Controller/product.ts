@@ -9,7 +9,7 @@ exports.create = async (req: { body: { email: any; firstName: any; lastName: any
     const user = new UserModel({
         productName: req.body.productName,
         productPrice: req.body.productPrice,
-        ProductImage: req.body.productImage,
+        productImage: req.body.productImage,
         productId: req.body.productId,
     });
     
