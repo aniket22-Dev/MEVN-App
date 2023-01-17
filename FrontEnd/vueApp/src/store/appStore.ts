@@ -11,11 +11,18 @@ export const useAppStore = defineStore("product",{
       productId: '',
       loading: false,
       submitting: false,
-      fetchingResults: false
+      fetchingResults: false,
+      users:[],
+      name: '',
+      email:'',
+      password:''
     }),
     getters: {
       getProducts(state){
         return state.products
+      },
+      getUsers(state){
+        return state.users
       }
     },
     actions: {
@@ -52,6 +59,27 @@ export const useAppStore = defineStore("product",{
         }
         catch(error) {
           console.log("error in posting product");
+          
+        }
+      },
+      async createUser() {
+        try{
+          this.submitting = true;
+          await axios.post('http://localhost:3000/register',{
+            name:this.name,
+            email: this.email,
+            password: this.password
+          }).then((response)=>{
+            const userData = response.data;
+            this.$state.users.push(userData);
+            this.name = "";
+            this.email = "";
+            this.password = "";
+            this.submitting = false;
+          })
+        }
+        catch(error){
+          console.log("error while creating user");
           
         }
       }
