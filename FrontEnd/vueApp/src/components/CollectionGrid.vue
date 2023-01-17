@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import {onMounted, computed} from "vue";
 import { useAppStore } from '../store/appStore';
-
+//test commit
 const store = useAppStore();
 
 const getProduct = computed(()=>{
