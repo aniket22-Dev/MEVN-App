@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import { createRouter,createWebHistory } from 'vue-router'
 import App from './App.vue'
 import CollectionGrid from './components/CollectionGrid.vue';
-import Create from './Admin/Create.vue'
-import LoginForm from './Login/LoginForm.vue'
+import Create from './Admin/Create.vue';
+import LoginForm from './Login/LoginForm.vue';
+import SignUp from './Login/SignUp.vue';
 
 //Import Pinia into your config file
 import { createPinia } from 'pinia'
@@ -13,7 +14,9 @@ const router = createRouter({
     routes: [
         { path:'/collection',name: 'collection', component: CollectionGrid },
         { path:'/admin/create',name: 'createCollection', component: Create },
-        { path:'/login',name: 'LoginForm', component: LoginForm }
+        { path:'/login',name: 'LoginForm', component: LoginForm },
+        { path:'/signup',name: 'signUp', component: SignUp }
+
     ]
 })
 createApp(App)
