@@ -15,7 +15,7 @@
   "description": "Backend API",
   "main": "server.ts",
   "scripts": {
-    "server": "nodemon --exec npx ts-node server"
+    "server": "nodemon --exec npx ts-node npm install typescript server"
   },
   "author": "",
   "license": "ISC"
