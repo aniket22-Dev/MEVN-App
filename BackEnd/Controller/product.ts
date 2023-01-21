@@ -1,4 +1,4 @@
-const UserModel = require('../model/productModel')
+const UserModel = require('../Model/productModel')
 
 // Create and Save a new user
 exports.create = async (req: { body: { email: any; firstName: any; lastName: any; phone: any; productName: any; productPrice: any; productImage: any; productId: any}; }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: { message: any; }): void; new(): any; }; }; send: (arg0: { message: string; user: any; }) => void; }) => {
