@@ -15,8 +15,7 @@
   "description": "Backend API",
   "main": "server.ts",
   "scripts": {
-    "server": "nodemon server",
-    "build": "npm"
+    "server": "nodemon server"
   },
   "author": "",
   "license": "ISC"
