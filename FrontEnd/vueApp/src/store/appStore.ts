@@ -82,6 +82,31 @@ export const useAppStore = defineStore("product",{
           console.log("error while creating user");
           
         }
+      },
+      async loginUser() {
+        try{
+          this.submitting = true;
+          await axios.post('http://localhost:3000/login',{
+            email: this.email,
+            password: this.password
+          }).then((response)=>{
+            const userData = response.data;
+            this.$state.users.push(userData);
+            this.email = "";
+            this.password = "";
+            this.submitting = false;
+            if(response.status == 200){
+              const url = `${window.location.origin}/collection`
+              
+              window.location.href = url;
+              return window.location.href;
+            }
+          })
+        }
+        catch(error){
+          console.log("error while creating user");
+          
+        }
       }
     },
 })
