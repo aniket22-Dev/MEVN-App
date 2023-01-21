@@ -95,12 +95,12 @@ export const useAppStore = defineStore("product",{
             this.email = "";
             this.password = "";
             this.submitting = false;
-            if(response.status == 200){
-              const url = `${window.location.origin}/collection`
+            // if(response.status == 200){
+            //   const url = `${window.location.origin}/collection`
               
-              window.location.href = url;
-              return window.location.href;
-            }
+            //   window.location.href = url;
+            //   return window.location.href;
+            // }
           })
         }
         catch(error){
