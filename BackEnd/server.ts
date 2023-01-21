@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
+app.get('/', (req: any, res: any) => {
+    res.send('Hey this is my API running 🥳')
+  })
+
 app.use('/v2',ProductRoute);
 app.use(userRoute);
 
