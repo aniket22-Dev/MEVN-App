@@ -1,15 +1,10 @@
 {
     "version": 2,
+    "name": "music-album",
     "builds": [
-      {
-        "src": "server.ts",
-        "use": "@now/node"
-      }
+       { "src": "server.ts", "use": "@vercel/node" }
     ],
     "routes": [
-      {
-        "src": "package.json",
-        "dest": "server.ts"
-      }
+       { "src": "/(.*)", "dest": "/server.ts" }
     ]
-  }
+ }
