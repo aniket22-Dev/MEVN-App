@@ -40,7 +40,7 @@ export const useAppStore = defineStore("product",{
       async postProducts() {
         try {
           this.submitting = true;
-          await axios.post('http://localhost:3000/v2',{
+          await axios.post('https://mevn-api-lzod.onrender.com/v2',{
             productName:this.productName,
             productPrice:this.productPrice,
             productImage:this.productImage,
@@ -65,7 +65,7 @@ export const useAppStore = defineStore("product",{
       async createUser() {
         try{
           this.submitting = true;
-          await axios.post('http://localhost:3000/register',{
+          await axios.post('https://mevn-api-lzod.onrender.com/register',{
             name:this.name,
             email: this.email,
             password: this.password
@@ -86,7 +86,7 @@ export const useAppStore = defineStore("product",{
       async loginUser() {
         try{
           this.submitting = true;
-          await axios.post('http://localhost:3000/login',{
+          await axios.post('https://mevn-api-lzod.onrender.com/login',{
             email: this.email,
             password: this.password
           }).then((response)=>{
