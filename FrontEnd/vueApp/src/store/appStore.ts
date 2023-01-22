@@ -15,7 +15,8 @@ export const useAppStore = defineStore("product",{
       users:[],
       name: '',
       email:'',
-      password:''
+      password:'',
+      response: false
     }),
     getters: {
       getProducts(state){
@@ -95,12 +96,11 @@ export const useAppStore = defineStore("product",{
             this.email = "";
             this.password = "";
             this.submitting = false;
-            // if(response.status == 200){
-            //   const url = `${window.location.origin}/collection`
-              
-            //   window.location.href = url;
-            //   return window.location.href;
-            // }
+            if(response.status == 200){
+              this.response = true;
+            } else{
+              this.response = false;
+            }
           })
         }
         catch(error){
