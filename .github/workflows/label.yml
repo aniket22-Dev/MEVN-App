@@ -19,4 +19,4 @@ jobs:
     steps:
     - uses: actions/labeler@v4
       with:
-        repo-token: "${{ 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 }}"
+        repo-token: "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"
