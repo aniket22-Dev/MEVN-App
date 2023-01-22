@@ -15,9 +15,11 @@ exports.create = async (req: { body: { email: any; firstName: any; lastName: any
     
     await user.save().then((data: any) => {
         res.send({
-            message:"User created successfully!!",
+            message:"Product created successfully!!",
             user:data
         });
+        console.log("Product created",data);
+        
     }).catch((err: { message: any; }) => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating user"
@@ -37,7 +39,7 @@ exports.findAll = async (req: any, res: { status: (arg0: number) => { (): any; n
     }
 };
 
-// Find a single User with an id
+// Find a single Product with an id
 exports.findOne = async (req: { params: { id: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }) => {
     try {
         const user = await UserModel.findById(req.params.id);
@@ -60,10 +62,10 @@ exports.update = async (req: { body: any; params: { id: any; }; }, res: { status
     await UserModel.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then((data: any) => {
         if (!data) {
             res.status(404).send({
-                message: `User not found.`
+                message: `Product not found.`
             });
         }else{
-            res.send({ message: "User updated successfully." })
+            res.send({ message: "Product updated successfully." })
         }
     }).catch((err: { message: any; }) => {
         res.status(500).send({
@@ -77,11 +79,11 @@ exports.destroy = async (req: { params: { id: any; }; }, res: { status: (arg0: n
     await UserModel.findByIdAndRemove(req.params.id).then((data: any) => {
         if (!data) {
           res.status(404).send({
-            message: `User not found.`
+            message: `Product not found.`
           });
         } else {
           res.send({
-            message: "User deleted successfully!"
+            message: "Product deleted successfully!"
           });
         }
     }).catch((err: { message: any; }) => {
