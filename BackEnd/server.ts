@@ -6,7 +6,6 @@ const cors = require('cors');
 const ProductRoute = require('./Routes/routes');
 const userRoute = require('./Routes/userRoutes');
 const env = require("dotenv");
-const compression = require("compression");
 const port = 3000
 
 const app = express().use(cors());
@@ -20,9 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //reset cache for servers
 app.use(express.static(__dirname + '/public', { maxAge: 31557600 }));
-
-//use to compress page content
-app.use(compression());
 
 app.use(bodyParser.json());
 
