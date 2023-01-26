@@ -40,9 +40,9 @@ exports.findAll = async (req: any, res: { status: (arg0: number) => { (): any; n
 };
 
 // Find a single Product with an id
-exports.findOne = async (req: { params: { id: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }) => {
+exports.findOne = async (req: any, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message: any; }): void; new(): any; }; }; }) => {
     try {
-        const user = await UserModel.findById(req.params.id);
+        const user = await UserModel.findById(req.params.id);   
         res.status(200).json(user);
     } catch(error) {
         res.status(404);
