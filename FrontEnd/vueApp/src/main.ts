@@ -14,6 +14,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path:'/collection',name: 'collection', component: CollectionGrid },
+        { path:'/',name: 'collection', component: CollectionGrid },
         { path:'/admin/create',name: 'createCollection', component: Create },
         { path:'/login',name: 'LoginForm', component: LoginForm },
         { path:'/signup',name: 'signUp', component: SignUp },
