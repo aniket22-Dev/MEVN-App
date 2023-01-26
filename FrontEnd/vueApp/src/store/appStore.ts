@@ -29,7 +29,7 @@ export const useAppStore = defineStore("product",{
     actions: {
       async fetchProducts() {
         try {
-          const data = await axios.get('http://localhost:3000/v2/getAll')
+          const data = await axios.get('https://mevn-api-lzod.onrender.com/v2/getAll')
             this.products = data.data;
             this.fetchingResults = false;
           }
@@ -40,7 +40,7 @@ export const useAppStore = defineStore("product",{
       async fetchById(params: any) {
         try{
           this.fetchingResults = true;
-          const data = await axios.get(`http://localhost:3000/v2/63c39161a987e2e3d22bd994`); 
+          const data = await axios.get(`https://mevn-api-lzod.onrender.com/v2/63c39161a987e2e3d22bd994`); 
         } catch (error) { 
           console.log("Not able to fetch might be server issue");
         }
