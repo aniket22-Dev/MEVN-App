@@ -17,9 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse request of content-type - application/json
 
+//reset cache for servers
+app.use(express.static(__dirname + '/public', { maxAge: 31557600 }));
+
 app.use(bodyParser.json());
 
+//help in cache control express server and loads it fast
 app.get('/', (req: any, res: any) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400');
     res.send('Hey this is my API running 🥳')
   })
 
