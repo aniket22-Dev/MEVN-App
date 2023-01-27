@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 // Import axios to make HTTP requests
 import axios from "axios"
+import { useRoute } from 'vue-router'
 
 export const useAppStore = defineStore("product",{
     state: () => ({ 
@@ -29,7 +30,7 @@ export const useAppStore = defineStore("product",{
     actions: {
       async fetchProducts() {
         try {
-          const data = await axios.get('https://mevn-api-lzod.onrender.com/v2/getAll')
+          const data = await await axios.get('https://mevn-api-lzod.onrender.com/v2/getAll')
             this.products = data.data;
             this.fetchingResults = false;
           }
@@ -37,11 +38,14 @@ export const useAppStore = defineStore("product",{
             console.log("server Issue")
         }
       },
-      async fetchById(params: any) {
+      async fetchById() {
         try{
           this.fetchingResults = true;
-          const data = await axios.get(`https://mevn-api-lzod.onrender.com/v2/63c39161a987e2e3d22bd994`); 
+          
+           const data = await axios.get(`https://mevn-api-lzod.onrender.com/v2/:id`); 
+           return data
         } catch (error) { 
+          console.log("id is",this.state?.products);
           console.log("Not able to fetch might be server issue");
         }
       },
@@ -117,7 +121,4 @@ export const useAppStore = defineStore("product",{
       }
     },
 })
-function useParams(): { id: any } {
-  throw new Error('Function not implemented.')
-}
 
