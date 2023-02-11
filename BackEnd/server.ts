@@ -6,6 +6,7 @@ const cors = require('cors');
 const ProductRoute = require('./Routes/routes');
 const userRoute = require('./Routes/userRoutes');
 const env = require("dotenv");
+const responseTime = require('response-time');
 const port = 3000
 
 const app = express().use(cors());
@@ -22,6 +23,7 @@ app.use(express.static(__dirname + '/public', { maxAge: 31557600 }));
 
 app.use(bodyParser.json());
 
+app.use(responseTime());
 //help in cache control express server and loads it fast
 app.get('/', (req: any, res: any) => {
     res.setHeader('Cache-Control', 'public, max-age=86400');

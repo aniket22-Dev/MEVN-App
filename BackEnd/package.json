@@ -20,5 +20,8 @@
     "server": "nodemon server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "response-time": "^2.3.2"
+  }
 }
