@@ -17,7 +17,7 @@ const router = createRouter({
         { path:'/admin/create',name: 'createCollection', component: Create },
         { path:'/login',name: 'LoginForm', component: LoginForm },
         { path:'/signup',name: 'signUp', component: SignUp },
-        { path: '/product/63c39161a987e2e3d22bd994', name: 'ProductPage', component: ProductPage}
+        { path: `/product/${window.location.href.split('/product/')[1]}`, name: 'ProductPage', component: ProductPage}
 
     ]
 })

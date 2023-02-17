@@ -9,6 +9,7 @@ export const useAppStore = defineStore("product",{
       productPrice: '',
       productImage: '',
       productId: '',
+      productObjectId: '', // Add new property for ObjectId
       loading: false,
       submitting: false,
       fetchingResults: false,
@@ -30,7 +31,7 @@ export const useAppStore = defineStore("product",{
       async fetchProducts() {
         try {
           this.fetchingResults = true;
-          const data = await await axios.get('https://mevn-api-lzod.onrender.com/v2/getAll')
+          const data = await axios.get('https://mevn-api-lzod.onrender.com/v2/getAll')
             this.products = data.data;
             this.fetchingResults = false;
           }
@@ -38,39 +39,38 @@ export const useAppStore = defineStore("product",{
             console.log("server Issue")
         }
       },
-      async fetchById(params: { id }) {
-        try{
+      async fetchProductById(id) {
+        try {
           this.fetchingResults = true;
-          console.log("params",params);
-          
-           const data = await axios.get('https://mevn-api-lzod.onrender.com/v2/' + params); 
-        } catch (error) { 
+          const data = await axios.get(`https://mevn-api-lzod.onrender.com/v2/${id}`);
+          this.products.push(data.data);
+          this.fetchingResults = false;
+        } catch (error) {
           console.log("Not able to fetch might be server issue");
         }
       },
       async postProducts() {
         try {
           this.submitting = true;
-          await axios.post('https://mevn-api-lzod.onrender.com/v2',{
-            productName:this.productName,
-            productPrice:this.productPrice,
-            productImage:this.productImage,
-            productId:this.productId
-
-          }).then((response) =>{
-            const productData = response.data;
-            this.$state.products.push(productData);
-            this.productName = "";
-            this.productPrice = "";
-            this.productImage = "";
-            this.productId = "";
-
-            this.submitting = false;
+          const response = await axios.post('https://mevn-api-lzod.onrender.com/v2',{
+            productName: this.productName,
+            productPrice: this.productPrice,
+            productImage: this.productImage,
+            productId: this.productId,
           });
+          
+          const productData = response.data;
+          this.$state.products.push(productData);
+          this.productName = "";
+          this.productPrice = "";
+          this.productImage = "";
+          this.productId = "";
+          // Store the ObjectId in the state
+          this.productObjectId = productData._id;
+          this.submitting = false;
         }
         catch(error) {
           console.log("error in posting product");
-          
         }
       },
       async createUser() {
@@ -91,7 +91,6 @@ export const useAppStore = defineStore("product",{
         }
         catch(error){
           console.log("error while creating user");
-          
         }
       },
       async loginUser() {
@@ -115,9 +114,8 @@ export const useAppStore = defineStore("product",{
         }
         catch(error){
           console.log("error while creating user");
-          
         }
       }
-    },
-})
-
+   
+    }
+  })
