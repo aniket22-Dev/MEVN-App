@@ -39,7 +39,7 @@ export const useAppStore = defineStore("product",{
             console.log("server Issue")
         }
       },
-      async fetchProductById(id) {
+      async fetchProductById(id: any) {
         try {
           this.fetchingResults = true;
           const data = await axios.get(`https://mevn-api-lzod.onrender.com/v2/${id}`);
