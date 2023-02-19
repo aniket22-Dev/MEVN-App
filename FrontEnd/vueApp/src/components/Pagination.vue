@@ -17,10 +17,10 @@
                 <!-- Display up to 5 pages, with ellipsis if needed -->
                 <template v-for="page in pages">
                     <!-- Show ellipsis if this is not the first page and the previous page is more than 1 page away -->
-                    <li v-if="page > 1 && page - previousPage > 1" class="border">
-                        <span class="px-3 py-2 leading-tight text-gray-500 bg-white border">{{ String.fromCharCode(8230)
-                        }}</span>
-                    </li>
+                    <!-- <li v-if="page > 1 && page - previousPage > 1" class="border">
+                            <span class="px-3 py-2 leading-tight text-gray-500 bg-white border">{{ String.fromCharCode(8230)
+                            }}</span>
+                        </li> -->
                     <!-- Show the page link -->
                     <li :class="{ 'border-gray-300 dark:border-gray-700': page === currentPage }" class="border">
                         <a @click.prevent="fetchProducts(page)" href="#"
