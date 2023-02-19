@@ -28,8 +28,9 @@
         alt="" />
     </div>
   </div>
-
-  <Pagination></Pagination>
+  <div class="m-0 m-auto text-center" v-if="!store.$state.fetchingResults">
+    <Pagination></Pagination>
+  </div>
 </template>
 
 <script setup lang="ts">
