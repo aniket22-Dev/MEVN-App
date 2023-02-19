@@ -18,7 +18,6 @@ const router = createRouter({
         { path:'/login',name: 'LoginForm', component: LoginForm },
         { path:'/signup',name: 'signUp', component: SignUp },
         { path: `/product/${window.location.href.split('/product/')[1]}`, name: 'ProductPage', component: ProductPage}
-
     ]
 })
 createApp(App)

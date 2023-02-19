@@ -82,7 +82,6 @@
     </div>
   </nav>
   <RouterView></RouterView>
-  <Pagination></Pagination>
 </template>
 
 <script setup lang="ts">
