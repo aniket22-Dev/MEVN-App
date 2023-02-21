@@ -7,6 +7,6 @@ router.get("/:id", ProductController.findOne);
 router.post("/", ProductController.create);
 router.patch("/:id", ProductController.update);
 router.delete("/:id", ProductController.destroy);
-router.post("/bulk", ProductController.post);
+//router.post("/bulk", ProductController.post);
 
 module.exports = router;
