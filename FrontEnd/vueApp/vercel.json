@@ -1,9 +1,3 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-    "logs": {
-        "runtime": {
-            "enabled": true,
-            "destination": "filesystem"
-        }
-    }
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
