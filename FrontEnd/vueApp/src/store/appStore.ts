@@ -44,8 +44,9 @@ export const useAppStore = defineStore("product", {
         this.totalPages = response.data.totalPages;
         this.currentPage = response.data.currentPage;
         this.totalItems = response.data.totalItems;
+        console.log("Fetched",page)
       } catch (error) {
-        console.error(error);
+        console.error("error while fetching product",error);
         // handle error here, e.g. show error message to user
       }
     },
@@ -56,6 +57,7 @@ export const useAppStore = defineStore("product", {
           `https://mevn-api-lzod.onrender.com/v2/${id}`
         );
         this.products.push(data.data);
+        console.log("Product fetched",id)
         this.fetchingResults = false;
       } catch (error) {
         console.log("Not able to fetch might be server issue");
