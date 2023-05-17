@@ -24,6 +24,6 @@ jobs:
 
     - name: Build
       run: |
+        cd BackEnd
         npm install
-        cd MEVN-App/backend/
         grunt
