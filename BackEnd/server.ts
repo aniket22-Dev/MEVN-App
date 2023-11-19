@@ -34,11 +34,11 @@ app.get("/", async (res: any) => {
   res.send("Hey this is my API running 🥳");
 });
 
-//if want to run on every second use * * * * * otherwise to run on everty 5pm use 0 17 * * *
+//if want to run on every second use * * * * * otherwise to run on everty 5pm use 15 15 * * *
 function runDailyGeneration() {
-  // Schedule the function to run once a day at 5 PM in Indian timezone
+  // Schedule the function to run at 3:15 PM daily in Indian timezone
   cron.schedule(
-    "0 17 * * *",
+    "15 15 * * *",
     async () => {
       console.log("Running generateDummyProducts...");
       await generateDummyProducts(1); // Adjust the number of dummy products as needed
@@ -51,9 +51,9 @@ function runDailyGeneration() {
 }
 
 function sync() {
-  // Schedule the function to run once a day at 5 PM in Indian timezone
+  // Schedule the function to run at every 15 minutes in Indian timezone
   cron.schedule(
-    "*/5 * * * *",
+    "*/15 * * * *",
     async () => {
       console.log("Sync Initiated");
       await synchronizeData(); // Adjust the number of dummy products as needed
