@@ -1,4 +1,4 @@
-const UserModel = require("../Model/productModel");
+const ProductModel = require("../Model/productModel");
 
 // Create and Save a new user
 exports.create = async (
@@ -27,7 +27,7 @@ exports.create = async (
   //     res.status(400).send({ message: "Content can not be empty!" });
   // }
 
-  const user = new UserModel({
+  const user = new ProductModel({
     productName: req.body.productName,
     productPrice: req.body.productPrice,
     productImage: req.body.productImage,
@@ -51,7 +51,7 @@ exports.create = async (
 };
 
 exports.post = async (req: any, res: any) => {
-  const user = new UserModel({
+  const user = new ProductModel({
     productName: req.body.productName,
     productPrice: req.body.productPrice,
     productImage: req.body.productImage,
@@ -59,7 +59,7 @@ exports.post = async (req: any, res: any) => {
   });
 
   try {
-    await UserModel.insertMany(user);
+    await ProductModel.insertMany(user);
     res.status(200).json({ message: "Products created successfully" });
   } catch (err: any) {
     res.status(500).send({
@@ -80,7 +80,7 @@ exports.findAll = async (
   }
 ) => {
   try {
-    const user = await UserModel.find();
+    const user = await ProductModel.find();
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({
@@ -103,7 +103,7 @@ exports.findOne = async (
   }
 ): Promise<void> => {
   try {
-    const user = await UserModel.findById(req.params.id);
+    const user = await ProductModel.findById(req.params.id);
     res.status(200).json(user);
   } catch (error) {
     res.status(404);
@@ -130,7 +130,9 @@ exports.update = async (
 
   const id = req.params.id;
 
-  await UserModel.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  await ProductModel.findByIdAndUpdate(id, req.body, {
+    useFindAndModify: false,
+  })
     .then((data: any) => {
       if (!data) {
         res.status(404).send({
@@ -159,7 +161,7 @@ exports.destroy = async (
     send: (arg0: { message: string }) => void;
   }
 ) => {
-  await UserModel.findByIdAndRemove(req.params.id)
+  await ProductModel.findByIdAndRemove(req.params.id)
     .then((data: any) => {
       if (!data) {
         res.status(404).send({

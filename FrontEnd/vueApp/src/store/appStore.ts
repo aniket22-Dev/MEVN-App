@@ -31,7 +31,7 @@ export const useAppStore = defineStore("product", {
     },
   },
   actions: {
-    async fetchProducts(page = 1, limit = 20) {
+    async fetchProducts(page = 1, limit = 60) {
       try {
         const response = await axios.get(
           "https://mevn-api-lzod.onrender.com/products",
@@ -44,9 +44,9 @@ export const useAppStore = defineStore("product", {
         this.totalPages = response.data.totalPages;
         this.currentPage = response.data.currentPage;
         this.totalItems = response.data.totalItems;
-        console.log("Fetched",page)
+        console.log("Fetched", page);
       } catch (error) {
-        console.error("error while fetching product",error);
+        console.error("error while fetching product", error);
         // handle error here, e.g. show error message to user
       }
     },
@@ -57,7 +57,7 @@ export const useAppStore = defineStore("product", {
           `https://mevn-api-lzod.onrender.com/v2/${id}`
         );
         this.products.push(data.data);
-        console.log("Product fetched",id)
+        console.log("Product fetched", id);
         this.fetchingResults = false;
       } catch (error) {
         console.log("Not able to fetch might be server issue");

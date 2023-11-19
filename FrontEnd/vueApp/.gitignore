@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+BackEnd\node_modules
+FrontEnd\node_modules
+node_modules
