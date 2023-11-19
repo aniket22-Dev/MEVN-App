@@ -1,3 +1,5 @@
+import generateDummyProducts from "./Controller/createProducts";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const dbConfig = require("./databaseConfig/database.config.ts");
@@ -65,6 +67,8 @@ app.listen(3000, () => {
 
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
+
+generateDummyProducts(1);
 
 mongoose
   .connect(dbConfig.url, {
