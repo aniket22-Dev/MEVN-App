@@ -44,7 +44,7 @@ async function generateDummyProducts(num: number): Promise<void> {
         }
       )
       .then(() => {
-        console.log("Database Admin Portal Connected");
+        // console.log("Database Admin Portal Connected");
       })
       .catch((err: any) => {
         console.log("Could not connect to the database", err);
@@ -79,7 +79,7 @@ async function generateDummyProducts(num: number): Promise<void> {
         console.log(`Product Created`);
       }
     }
-    dummyMongoose.disconnect();
+    // dummyMongoose.disconnect();
   } catch (error) {
     console.error("Error generating dummy products:", error);
   }
