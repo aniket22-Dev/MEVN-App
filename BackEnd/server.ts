@@ -1,5 +1,5 @@
 import generateDummyProducts from "./Controller/createProducts";
-
+import synchronizeData from "./SyncController/productService";
 const express = require("express");
 const bodyParser = require("body-parser");
 const dbConfig = require("./databaseConfig/database.config.ts");
@@ -13,6 +13,7 @@ const Product = require("./Model/productModel");
 const port = 3000;
 const cron = require("node-cron");
 const app = express().use(cors());
+
 env.config();
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -28,10 +29,41 @@ app.use(bodyParser.json());
 
 app.use(responseTime());
 //help in cache control express server and loads it fast
-// app.get("/", async (res: any) => {
-//   res.setHeader("Cache-Control", "public, max-age=86400");
-//   res.send("Hey this is my API running 🥳");
-// });
+app.get("/", async (res: any) => {
+  res.setHeader("Cache-Control", "public, max-age=86400");
+  res.send("Hey this is my API running 🥳");
+});
+
+//if want to run on every second use * * * * * otherwise to run on everty 5pm use 0 17 * * *
+function runDailyGeneration() {
+  // Schedule the function to run once a day at 5 PM in Indian timezone
+  cron.schedule(
+    "0 17 * * *",
+    async () => {
+      console.log("Running generateDummyProducts...");
+      await generateDummyProducts(1); // Adjust the number of dummy products as needed
+      console.log("generateDummyProducts executed!");
+    },
+    {
+      timezone: "Asia/Kolkata", // Indian timezone (IST - Indian Standard Time)
+    }
+  );
+}
+
+function sync() {
+  // Schedule the function to run once a day at 5 PM in Indian timezone
+  cron.schedule(
+    "*/5 * * * *",
+    async () => {
+      console.log("Sync Initiated");
+      await synchronizeData(); // Adjust the number of dummy products as needed
+      console.log("Product Sync Completed");
+    },
+    {
+      timezone: "Asia/Kolkata", // Indian timezone (IST - Indian Standard Time)
+    }
+  );
+}
 
 // Endpoint to fetch paginated data
 app.get("/products", async (req: any, res: any) => {
@@ -68,23 +100,8 @@ app.listen(3000, () => {
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
-//if want to run on every second use * * * * * otherwise to run on everty 5pm use 0 17 * * *
-function runDailyGeneration() {
-  // Schedule the function to run once a day at 5 PM in Indian timezone
-  cron.schedule(
-    "0 17 * * *",
-    async () => {
-      console.log("Running generateDummyProducts...");
-      await generateDummyProducts(1); // Adjust the number of dummy products as needed
-      console.log("generateDummyProducts executed!");
-    },
-    {
-      timezone: "Asia/Kolkata", // Indian timezone (IST - Indian Standard Time)
-    }
-  );
-}
-
 runDailyGeneration();
+sync();
 mongoose
   .connect(dbConfig.url, {
     useNewUrlParser: true,

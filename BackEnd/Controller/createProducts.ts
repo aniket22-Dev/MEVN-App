@@ -1,5 +1,6 @@
 import dummyMongoose, { Schema, Document, Model } from "mongoose";
 import generateData from "data-generator-retail";
+const DummyProducts = require("../Model/dummyProductModel"); // Correcting the import path to your schema file
 
 interface Product extends Document {
   productId: string;
@@ -7,29 +8,6 @@ interface Product extends Document {
   productPrice: string;
   productImage: string;
 }
-
-const productSchema: Schema<Product> = new Schema({
-  productId: {
-    type: String,
-  },
-  productName: {
-    type: String,
-    required: false,
-    unique: false,
-  },
-  productPrice: {
-    type: String,
-    default: "",
-  },
-  productImage: {
-    type: String,
-  },
-});
-
-const DummyProducts: Model<Product> = dummyMongoose.model(
-  "DummyProduct",
-  productSchema
-);
 
 async function generateDummyProducts(num: number): Promise<void> {
   try {
@@ -60,9 +38,7 @@ async function generateDummyProducts(num: number): Promise<void> {
       });
 
       if (existingProduct) {
-        console.log(
-          `Product with name/ID ${existingProduct.productName}/${existingProduct.productId} already exists. No need to create.`
-        );
+        console.log(`Product with name/ID already exists. No need to create.`);
       } else {
         const data = generateData();
 
