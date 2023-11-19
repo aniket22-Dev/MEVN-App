@@ -1,5 +1,6 @@
 import dummyMongoose, { Schema, Document, Model } from "mongoose";
 import generateData from "data-generator-retail";
+
 const DummyProducts = require("../Model/dummyProductModel"); // Correcting the import path to your schema file
 
 interface Product extends Document {

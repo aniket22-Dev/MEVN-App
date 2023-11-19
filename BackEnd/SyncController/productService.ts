@@ -23,6 +23,7 @@ async function synchronizeData() {
 
     // Update Product schema with new or changed items from DummyProduct
     for (const product of productsToUpdate) {
+      console.log(`Syncing product: ${JSON.stringify(product)}`);
       await Product.findByIdAndUpdate(product._id, product, { upsert: true });
     }
 
