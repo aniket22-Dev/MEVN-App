@@ -101,8 +101,8 @@ mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
 runDailyGeneration();
-// sync();
-synchronizeData();
+sync();
+
 mongoose
   .connect(dbConfig.url, {
     useNewUrlParser: true,
