@@ -31,7 +31,7 @@ export const useAppStore = defineStore("product", {
     },
   },
   actions: {
-    async fetchProducts(page = 1, limit = 60) {
+    async fetchProducts(page = 1, limit = 80) {
       try {
         const response = await axios.get(
           "https://mevn-api-lzod.onrender.com/products",
