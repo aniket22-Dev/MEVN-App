@@ -55,4 +55,4 @@ async function generateDummyProducts(num: number): Promise<void> {
   }
 }
 
-export default generateDummyProducts;
+module.exports = generateDummyProducts;

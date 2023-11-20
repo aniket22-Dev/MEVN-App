@@ -22,7 +22,7 @@ async function synchronizeData() {
     });
 
     // Update Product schema with new or changed items from DummyProduct in batches of 10
-    const batchSize = 5;
+    const batchSize = 3;
     for (let i = 0; i < productsToUpdate.length; i += batchSize) {
       const batch = productsToUpdate.slice(i, i + batchSize);
       console.log(`Syncing products batch ${i / batchSize + 1}`);
@@ -41,4 +41,4 @@ async function synchronizeData() {
   }
 }
 
-export default synchronizeData;
+module.exports = synchronizeData;

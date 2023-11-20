@@ -62,4 +62,4 @@ function generateDummyProducts(num) {
         }
     });
 }
-exports.default = generateDummyProducts;
+module.exports = generateDummyProducts;

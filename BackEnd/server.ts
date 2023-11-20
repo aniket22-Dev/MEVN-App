@@ -1,5 +1,5 @@
-const generateDummyProducts = require("./Controller/createProducts");
-const synchronizeData = require("./SyncController/productService");
+const generateDummyProduct = require("./Controller/createProducts");
+const synchronizeProduct = require("./SyncController/productService");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -36,10 +36,10 @@ app.use(responseTime());
 function runDailyGeneration() {
   // Schedule the function to run at 3:15 PM daily in Indian timezone
   cron.schedule(
-    "10 19 * * *",
+    "57 19 * * *",
     async () => {
       console.log("Running generateDummyProducts...");
-      await generateDummyProducts(1); // Adjust the number of dummy products as needed
+      await generateDummyProduct(1); // Adjust the number of dummy products as needed
       console.log("generateDummyProducts executed!");
     },
     {
@@ -51,7 +51,7 @@ function runDailyGeneration() {
 function sync() {
   // Schedule the function to run at every 15 minutes in Indian timezone
   cron.schedule(
-    "*/10 * * * *",
+    "*/15 * * * *",
     async () => {
       // Check if sync is already in progress, if so, terminate the new sync initiation
       if (isSyncInProgress) {
@@ -65,7 +65,7 @@ function sync() {
       isSyncInProgress = true;
 
       console.log("Sync Initiated");
-      await synchronizeData(); // Adjust the number of dummy products as needed
+      await synchronizeProduct(); // Adjust the number of dummy products as needed
       console.log("Product Sync Completed");
 
       // Reset flag to indicate sync has completed
