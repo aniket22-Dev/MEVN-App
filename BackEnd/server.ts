@@ -7,11 +7,13 @@ const cors = require("cors");
 const ProductRoute = require("./Routes/routes");
 const env = require("dotenv");
 const responseTime = require("response-time");
-const port = 3000;
 const cron = require("node-cron");
-const app = express().use(cors());
 
+const app = express().use(cors());
 env.config();
+
+const port = process.env.PORT || 3000; // Use environment variable for port or default to 3000
+const dbURL = process.env.url; // Use environment variable for MongoDB connection string
 
 // parse requests of content-type - application/x-www-form-urlencoded
 
@@ -65,8 +67,8 @@ function sync() {
 // Endpoint to fetch paginated data
 app.use(ProductRoute);
 
-app.listen(3000, () => {
-  console.log(`server is working fine on http://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
 
 mongoose.Promise = global.Promise;
@@ -76,16 +78,13 @@ runDailyGeneration();
 sync();
 
 mongoose
-  .connect(
-    "mongodb+srv://dbVue:9810189819Ab!@cluster0.idev8jp.mongodb.net/test",
-    {
-      useNewUrlParser: true,
-    }
-  )
-  .then(() => {
-    console.log("Databse Connected Successfully!!");
+  .connect(dbURL, {
+    useNewUrlParser: true,
   })
-  .catch((err: any) => {
+  .then(() => {
+    console.log("Database Connected Successfully!!");
+  })
+  .catch((err) => {
     console.log("Could not connect to the database", err);
     process.exit();
   });
