@@ -21,7 +21,7 @@
   "scripts": {
     "server": "nodemon server",
     "build": "tsc",
-    "start": "node server.js"
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",

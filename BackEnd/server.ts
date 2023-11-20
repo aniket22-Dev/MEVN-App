@@ -71,7 +71,7 @@ function sync() {
 app.use(ProductRoute);
 
 app.use("/v2", ProductRoute);
-app.use(userRoute);
+// app.use(userRoute);
 
 app.listen(3000, () => {
   console.log(`server is working fine on http://localhost:${port}`);
@@ -90,7 +90,7 @@ mongoose
   .then(() => {
     console.log("Databse Connected Successfully!!");
   })
-  .catch((err) => {
+  .catch((err: any) => {
     console.log("Could not connect to the database", err);
     process.exit();
   });

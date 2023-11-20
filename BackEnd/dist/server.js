@@ -61,7 +61,7 @@ function sync() {
 // Endpoint to fetch paginated data
 app.use(ProductRoute);
 app.use("/v2", ProductRoute);
-app.use(userRoute);
+// app.use(userRoute);
 app.listen(3000, () => {
     console.log(`server is working fine on http://localhost:${port}`);
 });

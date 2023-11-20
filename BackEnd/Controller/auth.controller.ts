@@ -2,7 +2,16 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../Model/userModel");
 
-exports.signup = async (req, res) => {
+exports.signup = async (
+  req: { body: { name: any; email: any; password: any } },
+  res: {
+    status: (arg0: number) => {
+      (): any;
+      new (): any;
+      send: { (arg0: { message: any }): void; new (): any };
+    };
+  }
+) => {
   try {
     const user = new User({
       name: req.body.name,
@@ -15,14 +24,30 @@ exports.signup = async (req, res) => {
     res.status(200).send({
       message: "User Registered successfully",
     });
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).send({
       message: err.message || "Some error occurred while registering the user.",
     });
   }
 };
 
-exports.signin = async (req, res) => {
+exports.signin = async (
+  req: { body: { email: any; password: any } },
+  res: {
+    status: (arg0: number) => {
+      (): any;
+      new (): any;
+      send: {
+        (arg0: {
+          message: any;
+          accessToken?: any;
+          user?: { id: any; email: any; name: any };
+        }): void;
+        new (): any;
+      };
+    };
+  }
+) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
@@ -63,7 +88,7 @@ exports.signin = async (req, res) => {
       message: "Login successful",
       accessToken: token,
     });
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).send({
       message: err.message || "Some error occurred while signing in.",
     });
