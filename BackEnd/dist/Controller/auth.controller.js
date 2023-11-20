@@ -45,7 +45,8 @@ exports.signin = (req, res) => __awaiter(this, void 0, void 0, function* () {
         }
         const token = jwt.sign({
             id: user.id,
-        }, "HSJSIJSMXSPPQQKOOKDAMCKN", {
+        }, "HSJSIJSMXSPPQQKOOKDAMCKN", //JWT
+        {
             expiresIn: 86400,
         });
         res.status(200).send({
