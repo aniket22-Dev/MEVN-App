@@ -1,14 +1,35 @@
 const Product = require("../Model/productModel");
 const DummyProducts = require("../Model/dummyProductModel");
 
+let batchSize = 3; // Initial batch size
+let syncPaused = false; // Flag to control sync pace based on memory usage
+
 // Function to compare data in DummyProduct and Product schemas and synchronize if different
 async function synchronizeData() {
   try {
+    const memoryUsage = process.memoryUsage().heapUsed / 1024 / 1024; // Memory usage in MB
+
+    // Adjust batch size based on memory usage
+    if (memoryUsage > 400) {
+      // If memory usage exceeds 400MB, reduce the batch size to slow down sync
+      batchSize = 1;
+      syncPaused = true;
+    } else {
+      // Otherwise, reset to the initial batch size and resume sync
+      batchSize = 3;
+      syncPaused = false;
+    }
+
+    if (syncPaused) {
+      console.log("Sync paused due to high memory usage");
+      return;
+    }
+
     // Fetch data from DummyProducts schema
-    const dummyProducts = await DummyProducts.find().lean().exec(); // Fetching as plain JavaScript objects
+    const dummyProducts = await DummyProducts.find().lean().exec();
 
     // Fetch data from Product schema
-    const products = await Product.find().lean().exec(); // Fetching as plain JavaScript objects
+    const products = await Product.find().lean().exec();
 
     // Identify new or changed items in DummyProduct
     const productsToUpdate = dummyProducts.filter((dummyProduct) => {
@@ -21,8 +42,7 @@ async function synchronizeData() {
       );
     });
 
-    // Update Product schema with new or changed items from DummyProduct in batches of 10
-    const batchSize = 3;
+    // Update Product schema with new or changed items from DummyProduct in batches
     for (let i = 0; i < productsToUpdate.length; i += batchSize) {
       const batch = productsToUpdate.slice(i, i + batchSize);
       console.log(`Syncing products batch ${i / batchSize + 1}`);
