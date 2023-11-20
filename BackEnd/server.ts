@@ -12,7 +12,8 @@ const cron = require("node-cron");
 const app = express().use(cors());
 
 env.config();
-
+// Flag to track if synchronization is in progress
+let isSyncInProgress = false;
 // parse requests of content-type - application/x-www-form-urlencoded
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,11 +51,25 @@ function runDailyGeneration() {
 function sync() {
   // Schedule the function to run at every 15 minutes in Indian timezone
   cron.schedule(
-    "*/30 * * * *",
+    "*/10 * * * *",
     async () => {
+      // Check if sync is already in progress, if so, terminate the new sync initiation
+      if (isSyncInProgress) {
+        console.log(
+          "Sync is already in progress. Terminating new sync initiation."
+        );
+        return;
+      }
+
+      // Set flag to indicate sync is in progress
+      isSyncInProgress = true;
+
       console.log("Sync Initiated");
       await synchronizeData(); // Adjust the number of dummy products as needed
       console.log("Product Sync Completed");
+
+      // Reset flag to indicate sync has completed
+      isSyncInProgress = false;
     },
     {
       timezone: "Asia/Kolkata", // Indian timezone (IST - Indian Standard Time)
