@@ -1,5 +1,7 @@
-import generateDummyProducts from "./Controller/createProducts";
-import synchronizeData from "./SyncController/productService";
+// import generateDummyProducts from "./Controller/createProducts";
+// import synchronizeData from "./SyncController/productService";
+const generateDummyProducts = require("./Controller/createProducts");
+const synchronizeData = require("./SyncController/productService");
 const express = require("express");
 const bodyParser = require("body-parser");
 const dbConfig = require("./databaseConfig/database.config.ts");
@@ -66,29 +68,7 @@ function sync() {
 }
 
 // Endpoint to fetch paginated data
-app.get("/products", async (req: any, res: any) => {
-  try {
-    const page = parseInt(req.query.page) || 1; // Current page, defaults to 1
-    const limit = parseInt(req.query.limit) || 10; // Items per page, defaults to 10
-
-    const startIndex = (page - 1) * limit; // Start index of items on the current page
-
-    const totalItems = await Product.countDocuments();
-    const totalPages = Math.ceil(totalItems / limit);
-
-    const results = await Product.find().skip(startIndex).limit(limit).exec();
-
-    res.json({
-      results,
-      totalPages,
-      currentPage: page,
-      totalItems,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Something went wrong");
-  }
-});
+app.use(ProductRoute);
 
 app.use("/v2", ProductRoute);
 app.use(userRoute);
