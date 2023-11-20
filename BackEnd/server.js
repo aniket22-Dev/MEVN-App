@@ -33,10 +33,10 @@ app.use(express.static(__dirname + "/public", { maxAge: 31557600 }));
 app.use(bodyParser.json());
 app.use(responseTime());
 //help in cache control express server and loads it fast
-app.get("/", (res) => __awaiter(this, void 0, void 0, function* () {
-    // res.setHeader("Cache-Control", "public, max-age=86400");
-    res.send("Hey Server is UP 🥳");
-}));
+// app.get("/", async (res) => {
+//   // res.setHeader("Cache-Control", "public, max-age=86400");
+//   res.send("Hey Server is UP 🥳");
+// });
 //if want to run on every second use * * * * * otherwise to run on everty 5pm use 15 15 * * *
 function runDailyGeneration() {
     // Schedule the function to run at 3:15 PM daily in Indian timezone
@@ -50,7 +50,7 @@ function runDailyGeneration() {
 }
 function sync() {
     // Schedule the function to run at every 15 minutes in Indian timezone
-    cron.schedule("* * * * *", () => __awaiter(this, void 0, void 0, function* () {
+    cron.schedule("*/15 * * * *", () => __awaiter(this, void 0, void 0, function* () {
         console.log("Sync Initiated");
         yield synchronizeData(); // Adjust the number of dummy products as needed
         console.log("Product Sync Completed");

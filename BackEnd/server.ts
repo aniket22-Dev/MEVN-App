@@ -31,10 +31,10 @@ app.use(bodyParser.json());
 
 app.use(responseTime());
 //help in cache control express server and loads it fast
-app.get("/", async (res: any) => {
-  // res.setHeader("Cache-Control", "public, max-age=86400");
-  res.send("Hey Server is UP 🥳");
-});
+// app.get("/", async (res) => {
+//   // res.setHeader("Cache-Control", "public, max-age=86400");
+//   res.send("Hey Server is UP 🥳");
+// });
 
 //if want to run on every second use * * * * * otherwise to run on everty 5pm use 15 15 * * *
 function runDailyGeneration() {
