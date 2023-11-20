@@ -35,7 +35,7 @@ app.use(responseTime());
 function runDailyGeneration() {
   // Schedule the function to run at 3:15 PM daily in Indian timezone
   cron.schedule(
-    "5 19 * * *",
+    "10 19 * * *",
     async () => {
       console.log("Running generateDummyProducts...");
       await generateDummyProducts(1); // Adjust the number of dummy products as needed
