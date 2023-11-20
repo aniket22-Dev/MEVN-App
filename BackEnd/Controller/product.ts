@@ -1,5 +1,31 @@
 const ProductModel = require("../Model/productModel");
 
+exports.paginated = async (req: any, res: any) => {
+  try {
+    const page = parseInt(req.query.page) || 1; // Current page, defaults to 1
+    const limit = parseInt(req.query.limit) || 10; // Items per page, defaults to 10
+
+    const startIndex = (page - 1) * limit; // Start index of items on the current page
+
+    const totalItems = await ProductModel.countDocuments();
+    const totalPages = Math.ceil(totalItems / limit);
+
+    const results = await ProductModel.find()
+      .skip(startIndex)
+      .limit(limit)
+      .exec();
+
+    res.json({
+      results,
+      totalPages,
+      currentPage: page,
+      totalItems,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
+  }
+};
 // Create and Save a new user
 exports.create = async (
   req: {

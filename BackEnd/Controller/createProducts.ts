@@ -1,14 +1,7 @@
-import dummyMongoose, { Schema, Document, Model } from "mongoose";
+import dummyMongoose from "mongoose";
 import generateData from "data-generator-retail";
 
 const DummyProducts = require("../Model/dummyProductModel"); // Correcting the import path to your schema file
-
-interface Product extends Document {
-  productId: string;
-  productName: string;
-  productPrice: string;
-  productImage: string;
-}
 
 async function generateDummyProducts(num: number): Promise<void> {
   try {

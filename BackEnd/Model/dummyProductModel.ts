@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const dummyMongoose = require("mongoose");
 
-const dummyProductSchema = new mongoose.Schema({
+const dummyProductSchema = new dummyMongoose.Schema({
   productId: {
     type: String,
   },
@@ -18,6 +18,6 @@ const dummyProductSchema = new mongoose.Schema({
   },
 });
 
-const DummyProduct = mongoose.model("DummyProduct", dummyProductSchema);
+const DummyProduct = dummyMongoose.model("DummyProduct", dummyProductSchema);
 
 module.exports = DummyProduct;
