@@ -20,7 +20,8 @@
   "main": "server.ts",
   "scripts": {
     "server": "nodemon server",
-    "start": "tsc && node server.ts"
+    "build": "tsc",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
