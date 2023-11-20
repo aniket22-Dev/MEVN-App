@@ -73,7 +73,7 @@ exports.signin = async (
       {
         id: user.id,
       },
-      "HSJSIJSMXSPPQQKOOKDAMCKN",
+      "HSJSIJSMXSPPQQKOOKDAMCKN",//JWT
       {
         expiresIn: 86400,
       }
