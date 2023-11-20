@@ -72,9 +72,6 @@ app.listen(3000, () => {
 mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
-runDailyGeneration();
-sync();
-
 mongoose
   .connect(
     "mongodb+srv://dbVue:9810189819Ab!@cluster0.idev8jp.mongodb.net/test",
@@ -89,3 +86,6 @@ mongoose
     console.log("Could not connect to the database", err);
     process.exit();
   });
+
+runDailyGeneration();
+sync();
