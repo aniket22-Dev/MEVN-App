@@ -7,20 +7,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// import generateDummyProducts from "./Controller/createProducts";
-// import synchronizeData from "./SyncController/productService";
 const generateDummyProducts = require("./Controller/createProducts");
 const synchronizeData = require("./SyncController/productService");
 const express = require("express");
 const bodyParser = require("body-parser");
-const dbConfig = require("./databaseConfig/database.config.ts");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const ProductRoute = require("./Routes/routes");
-const userRoute = require("./Routes/userRoutes");
 const env = require("dotenv");
 const responseTime = require("response-time");
-const Product = require("./Model/productModel");
 const port = 3000;
 const cron = require("node-cron");
 const app = express().use(cors());
@@ -60,8 +55,6 @@ function sync() {
 }
 // Endpoint to fetch paginated data
 app.use(ProductRoute);
-app.use("/v2", ProductRoute);
-// app.use(userRoute);
 app.listen(3000, () => {
     console.log(`server is working fine on http://localhost:${port}`);
 });
@@ -70,7 +63,7 @@ mongoose.set("strictQuery", false);
 runDailyGeneration();
 sync();
 mongoose
-    .connect(dbConfig.url, {
+    .connect("mongodb+srv://dbVue:9810189819Ab!@cluster0.idev8jp.mongodb.net/test", {
     useNewUrlParser: true,
 })
     .then(() => {
